@@ -23,6 +23,32 @@ class LithuaniaDateTest extends TestCase
     }
 
     /**
+     * @dataProvider dayDataProvider
+     * @param string $time
+     * @param string $format
+     * @param string $expected
+     */
+    public function testDays($time, $format, $expected)
+    {
+        $date = new LithuaniaDate($time);
+
+        $formattedDate = $date->format($format);
+
+        $this->assertEquals($expected, $formattedDate);
+    }
+
+    public function testDoNotChangeOtherValues()
+    {
+        $date = new LithuaniaDate('2000-01-01');
+
+        $format = 'Y m d';
+
+        $formattedDate = $date->format($format);
+
+        $this->assertEquals('2000 01 01', $formattedDate);
+    }
+
+    /**
      * @return array
      */
     public function monthDataProvider()
@@ -40,6 +66,22 @@ class LithuaniaDateTest extends TestCase
             ['2012-10-10', 'Y F d', '2012 Spalio 10'],
             ['2015-11-10', 'Y F d', '2015 Lapkričio 10'],
             ['2014-12-10', 'Y F d', '2014 Gruodžio 10'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function dayDataProvider()
+    {
+        return [
+            ['2000-01-03', 'l', 'Pirmadienis'],
+            ['2000-01-04', 'l', 'Antradienis'],
+            ['2000-01-05', 'l', 'Trečiadienis'],
+            ['2000-01-06', 'l', 'Ketvirtadienis'],
+            ['2000-01-07', 'l', 'Penktadienis'],
+            ['2000-01-08', 'l', 'Šeštadienis'],
+            ['2000-01-09', 'l', 'Sekmadienis'],
         ];
     }
 }
