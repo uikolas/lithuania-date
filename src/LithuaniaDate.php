@@ -9,8 +9,7 @@ class LithuaniaDate extends DateTimeImmutable
     /**
      * @var array
      */
-    private $translations = [
-        // Months
+    private $months = [
         'January'   => 'Sausio',
         'February'  => 'Vasario',
         'March'     => 'Kovo',
@@ -23,39 +22,46 @@ class LithuaniaDate extends DateTimeImmutable
         'October'   => 'Spalio',
         'November'  => 'Lapkričio',
         'December'  => 'Gruodžio',
-        // Days
+    ];
+
+    /**
+     * @var array
+     */
+    private $days = [
         'Monday'    => 'Pirmadienis',
         'Tuesday'   => 'Antradienis',
         'Wednesday' => 'Trečiadienis',
         'Thursday'  => 'Ketvirtadienis',
         'Friday'    => 'Penktadienis',
         'Saturday'  => 'Šeštadienis',
-        'Sunday'    => 'Sekmadienis'
+        'Sunday'    => 'Sekmadienis',
     ];
 
     /**
      * @param string $format
      * @return string
      */
-    public function format($format)
+    public function format($format): string
     {
-        $original = parent::format($format);
+        $parentFormat = parent::format($format);
 
-        $translate = $this->translate($original);
+        $translate = $this->translate($parentFormat);
 
         return $translate;
     }
 
     /**
-     * @param string $original
+     * @param string $parentFormat
      * @return string
      */
-    private function translate($original)
+    private function translate(string $parentFormat): string
     {
+        $combine = array_merge($this->months, $this->days);
+
         return str_replace(
-            array_keys($this->translations),
-            array_values($this->translations),
-            $original
+            array_keys($combine),
+            array_values($combine),
+            $parentFormat
         );
     }
 }
