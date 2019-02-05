@@ -9,11 +9,8 @@ class LithuaniaDateTest extends TestCase
 {
     /**
      * @dataProvider monthDataProvider
-     * @param string $time
-     * @param string $format
-     * @param string $expected
      */
-    public function testMonths($time, $format, $expected)
+    public function testMonths(string $time, string $format, string $expected): void
     {
         $date = new LithuaniaDate($time);
 
@@ -24,11 +21,8 @@ class LithuaniaDateTest extends TestCase
 
     /**
      * @dataProvider dayDataProvider
-     * @param string $time
-     * @param string $format
-     * @param string $expected
      */
-    public function testDays($time, $format, $expected)
+    public function testDays(string $time, string $format, string $expected): void
     {
         $date = new LithuaniaDate($time);
 
@@ -37,7 +31,7 @@ class LithuaniaDateTest extends TestCase
         $this->assertEquals($expected, $formattedDate);
     }
 
-    public function testDoNotChangeOtherValues()
+    public function testDoNotChangeOtherValues(): void
     {
         $date = new LithuaniaDate('2000-01-01');
 
@@ -48,10 +42,7 @@ class LithuaniaDateTest extends TestCase
         $this->assertEquals('2000 01 01', $formattedDate);
     }
 
-    /**
-     * @return array
-     */
-    public function monthDataProvider()
+    public function monthDataProvider(): array
     {
         return [
             ['2000-01-01', 'Y F d', '2000 Sausio 01'],
@@ -69,10 +60,7 @@ class LithuaniaDateTest extends TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function dayDataProvider()
+    public function dayDataProvider(): array
     {
         return [
             ['2000-01-03', 'l', 'Pirmadienis'],
