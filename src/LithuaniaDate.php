@@ -7,7 +7,7 @@ use DateTimeImmutable;
 class LithuaniaDate extends DateTimeImmutable
 {
     /**
-     * @var array
+     * @var string[]
      */
     private $months = [
         'January'   => 'Sausio',
@@ -25,7 +25,7 @@ class LithuaniaDate extends DateTimeImmutable
     ];
 
     /**
-     * @var array
+     * @var string[]
      */
     private $days = [
         'Monday'    => 'Pirmadienis',
@@ -37,10 +37,6 @@ class LithuaniaDate extends DateTimeImmutable
         'Sunday'    => 'Sekmadienis',
     ];
 
-    /**
-     * @param string $format
-     * @return string
-     */
     public function format($format): string
     {
         $parentFormat = parent::format($format);
@@ -50,10 +46,6 @@ class LithuaniaDate extends DateTimeImmutable
         return $translate;
     }
 
-    /**
-     * @param string $parentFormat
-     * @return string
-     */
     private function translate(string $parentFormat): string
     {
         $combine = array_merge($this->months, $this->days);
